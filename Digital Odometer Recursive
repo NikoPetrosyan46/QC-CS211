@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+
+void PrintCombination (string current,int length);
+int main() 
+{
+  PrintCombination("",0);
+    return 0;
+}
+
+void PrintCombination (string current,int length)
+{
+   if (length == 4)
+   {
+       cout << current << endl;
+       return; //do not input 0 because we have void
+   }
+   
+for (char digit = '0'; digit< '9'; digit++) // with char, you need to place ''
+   {
+       PrintCombination(current + digit, length + 1);
+   }
+}
