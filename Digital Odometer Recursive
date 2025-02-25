@@ -1,3 +1,5 @@
+// this was an outside project for myself, to understand recursive better
+
 #include <iostream>
 using namespace std;
 
