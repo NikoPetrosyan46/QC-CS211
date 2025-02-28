@@ -1,0 +1,83 @@
+#include <iostream>   // Include the standard input-output stream library
+using namespace std;  // Use the standard namespace to avoid needing to prefix std::
+
+// Define the size of the chessboard
+const int N = 8;  // The chessboard is 8x8, representing the 8-queens problem
+
+// Function to check if placing queens is valid
+bool ok(int q[]) {
+	// Loop through each pair of queens to check for conflicts
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < i; j++) {
+			// Check if queens are in the same column or on the same diagonal
+			if (q[i] == q[j] || abs(q[i] - q[j]) == abs(i - j)) {  // Row and diagonal tests
+				return false;  // If there is a conflict, return false
+			}
+		}
+	}
+	return true;  // No conflicts, return true
+}
+
+// Function to print the board in 2D representation
+void print_board(int q[]) {
+	// Create a 2D array to represent the chessboard
+	char board[N][N];
+
+	// Initialize the board with empty spaces ('.')
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < N; j++) {
+			board[i][j] = '.';  // Set each cell to a period (empty space)
+		}
+	}
+
+	// Place queens on the board using their positions in the array q[]
+	for (int r = 0; r < N; r++) {
+		board[r][q[r]] = 'Q';  // Place a queen 'Q' in the correct row and column
+	}
+
+	// Print the board to the console
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < N; j++) {
+			cout << board[i][j] << ' ';  // Print each cell with space between them
+		}
+		cout << endl;  // Print a newline after each row of the board
+	}
+	cout << endl;  // Print an extra newline for better readability
+}
+
+int main() {
+	int q[N] = {0};  // Initialize an array to store the positions of queens on the board
+	int count = 0;    // A counter to track the number of valid solutions found
+
+	// Nested loops to generate all possible configurations of queens
+	// Each loop iterates through the rows of the chessboard and assigns a queen to a column
+	for (int i0 = 0; i0 < N; i0++)     // Loop for the first queen (row 0)
+		for (int i1 = 0; i1 < N; i1++) // Loop for the second queen (row 1)
+			for (int i2 = 0; i2 < N; i2++) // Loop for the third queen (row 2)
+				for (int i3 = 0; i3 < N; i3++) // Loop for the fourth queen (row 3)
+					for (int i4 = 0; i4 < N; i4++) // Loop for the fifth queen (row 4)
+						for (int i5 = 0; i5 < N; i5++) // Loop for the sixth queen (row 5)
+							for (int i6 = 0; i6 < N; i6++) // Loop for the seventh queen (row 6)
+								for (int i7 = 0; i7 < N; i7++) { // Loop for the eighth queen (row 7)
+									// Assign each queen's column position
+									q[0] = i0;  // Queen in row 0
+									q[1] = i1;  // Queen in row 1
+									q[2] = i2;  // Queen in row 2
+									q[3] = i3;  // Queen in row 3
+									q[4] = i4;  // Queen in row 4
+									q[5] = i5;  // Queen in row 5
+									q[6] = i6;  // Queen in row 6
+									q[7] = i7;  // Queen in row 7
+
+									// Check if the current configuration is valid
+									if (ok(q)) {  // If placing queens is valid
+										count++;  // Increment the solution counter
+										cout << "Solution " << count << ":" << endl; // Print the solution number
+										print_board(q);  // Print the board for this solution
+									}
+								}
+
+	// Print the total number of solutions found
+	cout << "Total solutions: " << count << endl;
+	return 0;  // End the program successfully
+}
